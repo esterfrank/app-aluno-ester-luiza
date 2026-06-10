@@ -1,61 +1,82 @@
 import { useState } from 'react'
-import { useNavigate, NavLink } from 'react-router-dom'
-import InputField from '../components/InputField'
+import { Link, useNavigate } from 'react-router-dom'
+import AuthLayout from '../components/AuthLayout.jsx'
+import InputField from '../components/InputField.jsx'
+import Botao from '../components/Botao.jsx'
+import { useUsuario } from '../context/UsuarioContext.jsx'
 
 function LoginPage() {
   const [email, setEmail] = useState('')
   const [senha, setSenha] = useState('')
-  const [erro, setErro] = useState('')
 
+  const [erros, setErros] = useState({})
+
+  const { login } = useUsuario()
   const navigate = useNavigate()
 
-  function handleLogin() {
-    if (email === '' || senha === '') {
-        setErro('Preencha todos os campos')
-        return
+  function validar() {
+    const novosErros = {}
+
+    if (!email.trim()) {
+      novosErros.email = 'E-mail é obrigatório.'
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      novosErros.email = 'Informe um e-mail válido.'
     }
+
+    if (!senha.trim()) {
+      novosErros.senha = 'Senha é obrigatória.'
+    }
+
+    return novosErros
+  }
+
+  function handleSubmit(e) {
+    e.preventDefault()
+
+    const novosErros = validar()
+
+    if (Object.keys(novosErros).length > 0) {
+      setErros(novosErros)
+      return
+    }
+
+    login({ nome: 'João', email })
     navigate('/dashboard')
-    }
+  }
 
   return (
-    <div>
-      <h1>Login</h1>
+    <AuthLayout>
+      <h1>Bem-vindo de volta</h1>
+      <p>Por favor, insira suas credenciais para acessar seu painel acadêmico</p>
 
-      <InputField
-        type="email"
-        placeholder="Digite seu email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-    />
+      <form onSubmit={handleSubmit} noValidate>
+        <InputField
+          id="email"
+          label="Endereço de e-mail"
+          type="email"
+          placeholder="user@email.com"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          erro={erros.email}
+        />
 
-      <br />
-      <br />
+        <InputField
+          id="senha"
+          label="Senha"
+          type="password"
+          value={senha}
+          onChange={(e) => setSenha(e.target.value)}
+          erro={erros.senha}
+          linkLabel={{ texto: 'Esqueceu?', href: '/recuperar-senha' }}
+        />
 
-      <InputField
-        type="password"
-        placeholder="Digite sua senha"
-        value={senha}
-        onChange={(e) => setSenha(e.target.value)}
-    />
+        <Botao type="submit">Entrar</Botao>
+      </form>
 
-      <br />
-      <br />
-
-    {erro && <p>{erro}</p>}
-
-    <button onClick={handleLogin}>Entrar</button>
-
-    <br/>
-    
-    <NavLink to="/cadastro">Cadastre-se</NavLink>
-
-    <br />
-
-    <NavLink to="/recuperar">Esqueci minha senha</NavLink>
-
-    <br />
-
-    </div>
+      <p className="registre-se">
+        Não tem uma conta? <Link to="/cadastro">Registre-se agora.</Link>
+      </p>
+    </AuthLayout>
   )
 }
 

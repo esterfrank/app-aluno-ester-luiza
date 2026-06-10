@@ -1,43 +1,57 @@
 import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
-import InputField from '../components/InputField'
+import { Link, useNavigate } from 'react-router-dom'
+import AuthLayout from '../components/AuthLayout.jsx'
+import InputField from '../components/InputField.jsx'
+import Botao from '../components/Botao.jsx'
 
 function RecuperarSenhaPage() {
   const [email, setEmail] = useState('')
-  const [erro, setErro] = useState('')
-
+  const [erros, setErros] = useState({})
   const navigate = useNavigate()
 
-  function handleRecuperarSenha() {
-    if (email.trim() === '') {
-      setErro('Digite seu email')
+  function validar() {
+    const novosErros = {}
+    if (!email.trim()) {
+      novosErros.email = 'E-mail é obrigatório.'
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      novosErros.email = 'Informe um e-mail válido.'
+    }
+    return novosErros
+  }
+
+  function handleSubmit(e) {
+    e.preventDefault()
+    const novosErros = validar()
+    if (Object.keys(novosErros).length > 0) {
+      setErros(novosErros)
       return
     }
-
-    setErro('')
     navigate('/nova-senha')
   }
 
   return (
-    <div>
-      <h1>Recuperar Senha</h1>
+    <AuthLayout>
+      <h1>Esqueci minha senha</h1>
+      <p>Informe seu e-mail para enviarmos o link para redefinir sua senha.</p>
 
-      <InputField
-        type="email"
-        placeholder="Digite seu email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-      />
+      <form onSubmit={handleSubmit} noValidate>
+        <InputField
+          id="email"
+          label="Endereço de e-mail"
+          type="email"
+          placeholder="user@email.com"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          erro={erros.email}
+        />
 
-      <br />
-      <br />
+        <Botao type="submit">Enviar</Botao>
+      </form>
 
-      {erro && <p>{erro}</p>}
-
-      <button onClick={handleRecuperarSenha}>
-        Enviar
-      </button>
-    </div>
+      <p className="registre-se">
+        Lembrou a senha? <Link to="/login">Voltar para o login.</Link>
+      </p>
+    </AuthLayout>
   )
 }
 

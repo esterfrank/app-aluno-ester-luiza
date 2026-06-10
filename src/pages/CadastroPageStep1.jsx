@@ -4,7 +4,7 @@ import AuthLayout from '../components/AuthLayout.jsx'
 import InputField from '../components/InputField.jsx'
 import Botao from '../components/Botao.jsx'
 
-function CadastroStep1Page() {
+function CadastroPageStep1() {
   const [cpf, setCpf] = useState('')
   const [erros, setErros] = useState({})
   const navigate = useNavigate()
@@ -59,4 +59,4 @@ function CadastroStep1Page() {
   )
 }
 
-export default CadastroStep1Page
+export default CadastroPageStep1

@@ -5,7 +5,7 @@ import InputField from '../components/InputField.jsx'
 import Botao from '../components/Botao.jsx'
 import { useUsuario } from '../context/UsuarioContext.jsx'
 
-function CadastroStep2Page() {
+function CadastroPageStep2() {
   const [nome, setNome] = useState('')
   const [telefone, setTelefone] = useState('')
   const [email, setEmail] = useState('')
@@ -14,7 +14,6 @@ function CadastroStep2Page() {
 
   const { login } = useUsuario()
   const navigate = useNavigate()
-  // useLocation: acessa o state passado pelo navigate do passo 1
   const location = useLocation()
   const cpf = location.state?.cpf ?? ''
 
@@ -44,7 +43,6 @@ function CadastroStep2Page() {
       setErros(novosErros)
       return
     }
-    // Cadastro concluído: salva no contexto e vai para o dashboard
     login({ nome, email, telefone, cpf })
     navigate('/dashboard')
   }
@@ -103,4 +101,4 @@ function CadastroStep2Page() {
   )
 }
 
-export default CadastroStep2Page
+export default CadastroPageStep2
