@@ -32,3 +32,5 @@ function App() {
 }
 
 export default App
+
+const ester = ester
