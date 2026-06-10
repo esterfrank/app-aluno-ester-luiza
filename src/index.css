@@ -1,111 +1,428 @@
-:root {
-  --text: #6b6375;
-  --text-h: #08060d;
-  --bg: #fff;
-  --border: #e5e4e7;
-  --code-bg: #f4f3ec;
-  --accent: #aa3bff;
-  --accent-bg: rgba(170, 59, 255, 0.1);
-  --accent-border: rgba(170, 59, 255, 0.5);
-  --social-bg: rgba(244, 243, 236, 0.5);
-  --shadow:
-    rgba(0, 0, 0, 0.1) 0 10px 15px -3px, rgba(0, 0, 0, 0.05) 0 4px 6px -2px;
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap');
 
-  --sans: system-ui, 'Segoe UI', Roboto, sans-serif;
-  --heading: system-ui, 'Segoe UI', Roboto, sans-serif;
-  --mono: ui-monospace, Consolas, monospace;
-
-  font: 18px/145% var(--sans);
-  letter-spacing: 0.18px;
-  color-scheme: light dark;
-  color: var(--text);
-  background: var(--bg);
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-
-  @media (max-width: 1024px) {
-    font-size: 16px;
-  }
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --text: #9ca3af;
-    --text-h: #f3f4f6;
-    --bg: #16171d;
-    --border: #2e303a;
-    --code-bg: #1f2028;
-    --accent: #c084fc;
-    --accent-bg: rgba(192, 132, 252, 0.15);
-    --accent-border: rgba(192, 132, 252, 0.5);
-    --social-bg: rgba(47, 48, 58, 0.5);
-    --shadow:
-      rgba(0, 0, 0, 0.4) 0 10px 15px -3px, rgba(0, 0, 0, 0.25) 0 4px 6px -2px;
-  }
-
-  #social .button-icon {
-    filter: invert(1) brightness(2);
-  }
-}
-
-body {
-  margin: 0;
-}
-
-#root {
-  width: 1126px;
-  max-width: 100%;
-  margin: 0 auto;
-  text-align: center;
-  border-inline: 1px solid var(--border);
-  min-height: 100svh;
-  display: flex;
-  flex-direction: column;
+/* =============================================
+   RESET & BASE
+   ============================================= */
+* {
   box-sizing: border-box;
 }
 
-h1,
-h2 {
-  font-family: var(--heading);
-  font-weight: 500;
-  color: var(--text-h);
-}
-
-h1 {
-  font-size: 56px;
-  letter-spacing: -1.68px;
-  margin: 32px 0;
-  @media (max-width: 1024px) {
-    font-size: 36px;
-    margin: 20px 0;
-  }
-}
-h2 {
-  font-size: 24px;
-  line-height: 118%;
-  letter-spacing: -0.24px;
-  margin: 0 0 8px;
-  @media (max-width: 1024px) {
-    font-size: 20px;
-  }
-}
-p {
+body {
+  padding: 0;
   margin: 0;
+  font-family: "DM Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
 }
 
-code,
-.counter {
-  font-family: var(--mono);
-  display: inline-flex;
+/* =============================================
+   TELAS DE AUTENTICAÇÃO
+   ============================================= */
+
+/* Container split: hero (verde) | formulário (branco) */
+.container {
+  display: flex;
+  min-height: 100vh;
+}
+
+.container > div {
+  width: 50%;
+}
+
+/* Painel verde esquerdo */
+.hero {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  color: #ffffff;
+  background-color: #0f5830;
+  position: sticky;
+  top: 0;
+}
+
+.hero p {
+  display: block;
+  width: 80%;
+  font-size: 40px;
+  font-style: italic;
+}
+
+.hero p span {
+  display: block;
+  margin-top: 30px;
+  font-size: 14px;
+  text-transform: uppercase;
+  font-style: normal;
+}
+
+/* Lado direito: área do formulário */
+.formulario {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+.formulario > div {
+  width: 60%;
+}
+
+.formulario h1 {
+  margin-bottom: 8px;
+}
+
+.formulario p {
+  color: #666;
+  margin-top: 0;
+}
+
+.formulario a {
+  color: #0f5830;
+  text-decoration: none;
+}
+
+.formulario a:hover {
+  text-decoration: underline;
+}
+
+.registre-se {
+  text-align: center;
+  margin-top: 16px;
+}
+
+/* =============================================
+   COMPONENTE: InputField
+   ============================================= */
+.input-field {
+  margin-top: 20px;
+}
+
+.input-field label {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.input-field input {
+  display: block;
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #cccccc;
   border-radius: 4px;
-  color: var(--text-h);
+  font-family: inherit;
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.2s;
 }
 
-code {
-  font-size: 15px;
-  line-height: 135%;
+.input-field input:focus {
+  border-color: #0f5830;
+}
+
+/* Mensagem de erro — renderização condicional no componente */
+.input-field__erro {
+  display: block;
+  margin-top: 4px;
+  color: #d32f2f;
+  font-size: 12px;
+}
+
+/* Input com erro: borda vermelha */
+.input-field input:has(+ .input-field__erro),
+.input-field:has(.input-field__erro) input {
+  border-color: #d32f2f;
+}
+
+/* =============================================
+   COMPONENTE: Botao
+   ============================================= */
+.botao {
+  display: block;
+  width: 100%;
+  margin-top: 24px;
+  padding: 14px 16px;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.botao:hover {
+  opacity: 0.88;
+}
+
+.botao--primario {
+  background-color: #0f5830;
+  color: #ffffff;
+}
+
+/* =============================================
+   LAYOUT INTERNO (pós-login)
+   ============================================= */
+.dashboard {
+  background-color: #ededed;
+  min-height: 100vh;
+}
+
+/* Menu de navegação */
+.menu {
+  background-color: #ffffff;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.menu__body {
+  display: flex;
+  align-items: center;
+  width: 960px;
+  margin: 0 auto;
+  padding: 20px 0;
+  gap: 16px;
+}
+
+.menu__title {
+  margin: 0;
+  font-size: 18px;
+  color: #0f5830;
+}
+
+.menu__title span {
+  display: block;
+  font-size: 12px;
+  color: #cccccc;
+  font-weight: 400;
+}
+
+.menu__links {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* NavLink — React Router adiciona classe "active" automaticamente */
+.menu__item {
+  display: inline-block;
+  padding: 6px 10px;
+  color: #999999;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 14px;
+  border-radius: 4px;
+  transition: color 0.2s;
+}
+
+.menu__item:hover {
+  color: #0f5830;
+}
+
+/* Classe aplicada pelo NavLink quando a rota está ativa */
+.menu__item--active,
+.menu__item.active {
+  color: #0f5830;
+}
+
+/* Botão de logout no menu */
+.menu__logout {
+  margin-left: 16px;
+  padding: 6px 14px;
+  background: none;
+  border: 1px solid #cccccc;
+  border-radius: 4px;
+  font-family: inherit;
+  font-size: 13px;
+  color: #999;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.menu__logout:hover {
+  border-color: #0f5830;
+  color: #0f5830;
+}
+
+/* Conteúdo interno */
+.dashboard__container {
+  width: 960px;
+  margin: 0 auto;
+  padding-bottom: 40px;
+}
+
+.welcome {
+  padding: 40px 0 20px;
+}
+
+.welcome h2 {
+  margin: 0;
+  font-size: 28px;
+  color: #0f5830;
+}
+
+.welcome p {
+  color: #999999;
+  margin: 8px 0 0;
+}
+
+/* =============================================
+   CARDS (estrutura base para Parcial 2)
+   ============================================= */
+.card {
+  display: flex;
+  padding: 32px;
+  margin: 20px 0;
+  background-color: #ffffff;
+  border: 1px solid #cccccc;
+  border-radius: 4px;
+}
+
+.card__body {
+  flex-grow: 1;
+  padding-right: 50px;
+}
+
+.card__badge {
+  display: inline-block;
   padding: 4px 8px;
-  background: var(--code-bg);
+  background-color: #f0f0f0;
+  color: #0f5830;
+  font-size: 11px;
+  text-transform: uppercase;
+  font-weight: 600;
+  border-radius: 2px;
+}
+
+.card__title {
+  margin: 8px 0 0;
+  color: #0f5830;
+  font-size: 20px;
+}
+
+.card__description {
+  margin: 6px 0 0;
+  color: #999999;
+  font-size: 14px;
+}
+
+.card__progress {
+  width: 75%;
+  height: 10px;
+  margin-top: 16px;
+  background-color: #e0e0e0;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.card__progress div {
+  height: 10px;
+  background-color: #0f5830;
+  border-radius: 8px;
+}
+
+.card__button {
+  align-self: center;
+  padding: 12px 20px;
+  color: #ffffff;
+  text-transform: uppercase;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  border: none;
+  border-radius: 4px;
+  background-color: #0f5830;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: opacity 0.2s;
+}
+
+.card__button:hover {
+  opacity: 0.88;
+}
+
+.card__group {
+  display: flex;
+  gap: 16px;
+  margin: 20px 0;
+}
+
+.card__group .card {
+  flex: 1;
+  margin: 0;
+  padding: 24px;
+}
+
+.card__group .card__badge {
+  background: none;
+  padding: 0;
+  color: #999;
+}
+
+/* =============================================
+   RESPONSIVO — MOBILE
+   ============================================= */
+@media (max-width: 768px) {
+  /* Esconde o painel verde no mobile */
+  .hero {
+    display: none;
+  }
+
+  .container {
+    min-height: 100vh;
+  }
+
+  /* Formulário ocupa 100% da largura */
+  .container > div,
+  .formulario > div {
+    width: 100%;
+    padding: 0 24px;
+  }
+
+  .formulario {
+    justify-content: flex-start;
+    padding-top: 60px;
+  }
+
+  /* Container interno ocupa largura total */
+  .dashboard__container,
+  .menu__body {
+    width: 100%;
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  /* Esconde links do menu no mobile */
+  .menu__links {
+    display: none;
+  }
+
+  /* Cards empilham verticalmente */
+  .card {
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .card__body {
+    padding-right: 0;
+  }
+
+  .card__progress {
+    width: 100%;
+  }
+
+  .card__button {
+    width: 100%;
+    text-align: center;
+  }
+
+  .card__group {
+    flex-direction: column;
+  }
 }
