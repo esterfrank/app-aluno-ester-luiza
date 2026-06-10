@@ -3,6 +3,10 @@ import { NavLink } from 'react-router-dom'
 function Navbar() {
   return (
     <nav>
+      
+      <NavLink to="/dashboard">Dashboard</NavLink>
+
+      <br />
 
       <NavLink to="/perfil">Perfil</NavLink>
 
