@@ -34,3 +34,5 @@ function App() {
 export default App
 
 const ester = ester
+const luiza = luiza
+const majo = majo
