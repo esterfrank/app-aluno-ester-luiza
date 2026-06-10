@@ -1,8 +1,20 @@
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 function LoginPage() {
   const [email, setEmail] = useState('')
   const [senha, setSenha] = useState('')
+  const [erro, setErro] = useState('')
+
+  const navigate = useNavigate()
+
+  function handleLogin() {
+    if (email === '' || senha === '') {
+        setErro('Preencha todos os campos')
+        return
+    }
+    navigate('/dashboard')
+    }
 
   return (
     <div>
@@ -28,7 +40,10 @@ function LoginPage() {
       <br />
       <br />
 
-      <button>Entrar</button>
+    {erro && <p>{erro}</p>}
+
+    <button onClick={handleLogin}>Entrar</button>
+    
     </div>
   )
 }
