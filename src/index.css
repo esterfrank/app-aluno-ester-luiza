@@ -426,3 +426,230 @@ body {
     flex-direction: column;
   }
 }
+/*--------------------------------------------------------------------------*/
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap');
+
+/* =============================================
+   RESET & BASE
+   ============================================= */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  padding: 0;
+  margin: 0;
+  font-family: "DM Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+  background-color: #f7f6f3;
+}
+
+/* =============================================
+   TELAS DE AUTENTICAÇÃO
+   ============================================= */
+
+/* Container centralizado — substitui o split de 50/50 */
+.container {
+  display: flex;
+  min-height: 100vh;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+
+/* Painel hero oculto — layout não usa mais split */
+.hero {
+  display: none;
+}
+
+/* Área do formulário: ocupa 100% sem divisão */
+.formulario {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+/* Card branco centralizado */
+.formulario > div {
+  background: #ffffff;
+  border: 0.5px solid #e0ddd8;
+  border-radius: 16px;
+  width: 100%;
+  max-width: 420px;
+  padding: 48px 44px 40px;
+}
+
+/* Eyebrow — "Painel acadêmico" */
+.formulario > div > p:first-of-type {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #888888;
+  margin: 0 0 20px;
+}
+
+/* Divisor fino abaixo do eyebrow */
+.formulario > div > p:first-of-type::after {
+  content: '';
+  display: block;
+  width: 32px;
+  height: 1.5px;
+  background: #e0ddd8;
+  margin-top: 20px;
+}
+
+/* Título principal em serif itálico */
+.formulario h1 {
+  font-family: "Instrument Serif", serif;
+  font-style: italic;
+  font-size: 34px;
+  font-weight: 400;
+  color: #1a1a1a;
+  line-height: 1.15;
+  margin: 0 0 6px;
+}
+
+/* Subtítulo */
+.formulario h1 + p {
+  font-size: 13.5px;
+  color: #888888;
+  margin: 0 0 32px;
+  line-height: 1.5;
+}
+
+.formulario a {
+  color: #1a1a1a;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.formulario a:hover {
+  opacity: 0.7;
+}
+
+/* "Não tem uma conta?" */
+.registre-se {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 13px;
+  color: #999999;
+}
+
+/* =============================================
+   COMPONENTE: InputField
+   ============================================= */
+.input-field {
+  margin-bottom: 16px;
+}
+
+.input-field label {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 7px;
+  font-size: 13px;
+  font-weight: 500;
+  color: #333333;
+}
+
+.input-field label a {
+  font-size: 12px;
+  font-weight: 400;
+  color: #888888;
+  text-decoration: none;
+}
+
+.input-field label a:hover {
+  color: #1a1a1a;
+}
+
+.input-field input {
+  display: block;
+  width: 100%;
+  padding: 10px 13px;
+  border: 0.5px solid #d6d3ce;
+  border-radius: 8px;
+  font-family: "DM Sans", sans-serif;
+  font-size: 14px;
+  color: #1a1a1a;
+  background: #faf9f7;
+  outline: none;
+  transition: border-color 0.15s, background 0.15s;
+}
+
+.input-field input::placeholder {
+  color: #bbbbbb;
+}
+
+.input-field input:focus {
+  border-color: #1a1a1a;
+  background: #ffffff;
+}
+
+/* Mensagem de erro */
+.input-field__erro {
+  display: block;
+  margin-top: 5px;
+  color: #c0392b;
+  font-size: 12px;
+}
+
+/* Input com erro */
+.input-field:has(.input-field__erro) input {
+  border-color: #c0392b;
+  background: #fff8f7;
+}
+
+/* =============================================
+   COMPONENTE: Botao
+   ============================================= */
+.botao {
+  display: block;
+  width: 100%;
+  margin-top: 24px;
+  padding: 12px 16px;
+  font-family: "DM Sans", sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: opacity 0.15s;
+}
+
+.botao:hover {
+  opacity: 0.85;
+}
+
+.botao:active {
+  opacity: 0.7;
+}
+
+.botao--primario {
+  background-color: #1a1a1a;
+  color: #ffffff;
+}
+
+/* =============================================
+   RESPONSIVO — MOBILE
+   ============================================= */
+@media (max-width: 480px) {
+  .container {
+    padding: 1.5rem 1rem;
+    align-items: flex-start;
+    padding-top: 48px;
+  }
+
+  .formulario > div {
+    padding: 36px 28px 32px;
+  }
+
+  .formulario h1 {
+    font-size: 28px;
+  }
+}
