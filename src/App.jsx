@@ -11,6 +11,10 @@ import TutorIAPage from './pages/TutorIAPage.jsx'
 import PerfilPage from './pages/PerfilPage.jsx'
 import LayoutInterno from './components/LayoutInterno.jsx'
 
+<UsuarioProvider>
+  <App />
+</UsuarioProvider>
+
 function App() {
   return (
     <Routes>
