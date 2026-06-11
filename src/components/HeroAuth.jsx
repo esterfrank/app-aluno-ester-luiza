@@ -2,9 +2,8 @@ function HeroAuth() {
   return (
     <div className="hero">
       <p>
-        "Educação não é o aprendizado de fatos,
-        mas treinamento da mente para pensar."
-        <span>Albert Einstein</span>
+        "Da sua vulnerabilidade virá a sua força."
+        <span>Sigmund Freud</span>
       </p>
     </div>
   )
