@@ -17,6 +17,7 @@ function CadastroPageStep2() {
   const location = useLocation()
   const cpf = location.state?.cpf ?? ''
 
+
   function validar() {
     const novosErros = {}
 
@@ -43,7 +44,12 @@ function CadastroPageStep2() {
       setErros(novosErros)
       return
     }
-    login({ nome, email, telefone, cpf })
+    login({ 
+      nome: nome,
+      email: email, 
+      telefone: telefone, 
+      cpf: cpf,
+      senha: senha})
     navigate('/dashboard')
   }
 

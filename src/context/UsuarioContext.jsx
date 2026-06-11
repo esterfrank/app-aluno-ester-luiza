@@ -1,9 +1,24 @@
-import { createContext, useContext, useState } from 'react'
+import { createContext, useContext, useState, useEffect } from 'react'
 
-const UsuarioContext = createContext(null)
+const UsuarioContext = createContext()
 
 export function UsuarioProvider({ children }) {
   const [usuario, setUsuario] = useState(null)
+
+  // Carrega usuário do localStorage (se existir)
+  useEffect(() => {
+    const data = localStorage.getItem('usuario')
+    if (data) {
+      setUsuario(JSON.parse(data))
+    }
+  }, [])
+
+  // Salva usuário no localStorage sempre que mudar
+  useEffect(() => {
+    if (usuario) {
+      localStorage.setItem('usuario', JSON.stringify(usuario))
+    }
+  }, [usuario])
 
   function login(dadosUsuario) {
     setUsuario(dadosUsuario)
@@ -11,19 +26,20 @@ export function UsuarioProvider({ children }) {
 
   function logout() {
     setUsuario(null)
+    localStorage.removeItem('usuario')
+  }
+
+  function atualizarFoto(base64) {
+    setUsuario((prev) => ({ ...prev, foto: base64 }))
   }
 
   return (
-    <UsuarioContext.Provider value={{ usuario, login, logout }}>
+    <UsuarioContext.Provider value={{ usuario, setUsuario, login, logout }}>
       {children}
     </UsuarioContext.Provider>
   )
 }
 
 export function useUsuario() {
-  const context = useContext(UsuarioContext)
-  if (!context) {
-    throw new Error('useUsuario deve ser usado dentro de UsuarioProvider')
-  }
-  return context
+  return useContext(UsuarioContext)
 }

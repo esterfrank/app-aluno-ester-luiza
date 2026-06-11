@@ -285,6 +285,54 @@ body {
   color: #1a1a1a;
 }
 
+/* Avatar no menu */
+.menu__usuario {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-left: 16px;
+  cursor: pointer;
+  padding: 4px 10px;
+  border-radius: 8px;
+  transition: background 0.15s;
+}
+
+.menu__usuario:hover {
+  background: #f0efec;
+}
+
+.menu__avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: #f0efec;
+  border: 0.5px solid #e0ddd8;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.menu__avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.menu__avatar span {
+  font-family: "Instrument Serif", serif;
+  font-style: italic;
+  font-size: 15px;
+  color: #aaaaaa;
+}
+
+.menu__usuario-nome {
+  font-size: 13px;
+  font-weight: 500;
+  color: #333333;
+}
+
 /* =============================================
    LAYOUT INTERNO — container
    ============================================= */
@@ -632,5 +680,141 @@ body {
 
   .formulario h1 {
     font-size: 28px;
+  }
+}
+
+/* =============================================
+   PERFIL PAGE
+   ============================================= */
+.perfil__card {
+  background: #ffffff;
+  border: 0.5px solid #e0ddd8;
+  border-radius: 12px;
+  padding: 28px 32px;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  margin-bottom: 16px;
+}
+
+.perfil__foto {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: #f0efec;
+  border: 0.5px solid #e0ddd8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.perfil__foto img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.perfil__foto-inicial {
+  font-family: "Instrument Serif", serif;
+  font-style: italic;
+  font-size: 32px;
+  color: #aaaaaa;
+}
+
+.perfil__foto-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  color: #ffffff;
+  font-size: 11px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.perfil__foto:hover .perfil__foto-overlay {
+  opacity: 1;
+}
+
+.perfil__info {
+  flex: 1;
+}
+
+.perfil__nome {
+  font-family: "Instrument Serif", serif;
+  font-style: italic;
+  font-size: 26px;
+  font-weight: 400;
+  color: #1a1a1a;
+  margin: 0 0 4px;
+}
+
+.perfil__email {
+  font-size: 13px;
+  color: #aaaaaa;
+  margin: 0;
+}
+
+.perfil__dados {
+  background: #ffffff;
+  border: 0.5px solid #e0ddd8;
+  border-radius: 12px;
+  padding: 28px 32px;
+}
+
+.perfil__dados-titulo {
+  font-size: 14px;
+  font-weight: 600;
+  color: #1a1a1a;
+  margin: 0 0 20px;
+}
+
+.perfil__dados-lista {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  margin-bottom: 24px;
+}
+
+.perfil__dados-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 0;
+  border-bottom: 0.5px solid #f0efec;
+}
+
+.perfil__dados-item:last-child {
+  border-bottom: none;
+}
+
+.perfil__dados-label {
+  font-size: 13px;
+  color: #aaaaaa;
+  font-weight: 500;
+}
+
+.perfil__dados-valor {
+  font-size: 13px;
+  color: #1a1a1a;
+}
+
+@media (max-width: 768px) {
+  .perfil__card {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .perfil__dados-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2px;
   }
 }

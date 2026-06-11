@@ -27,6 +27,16 @@ function LayoutInterno() {
             <NavLink to="/perfil" className={getNavClass}>Perfil</NavLink>
           </nav>
 
+          <div className="menu__usuario" onClick={() => navigate('/perfil')}>
+            <div className="menu__avatar">
+              {usuario?.foto
+                ? <img src={usuario.foto} alt="Foto de perfil" />
+                : <span>{usuario?.nome?.[0] ?? 'A'}</span>
+              }
+            </div>
+            <span className="menu__usuario-nome">{usuario?.nome ?? 'Aluno'}</span>
+          </div>
+          
           {/* Botão de logout visível no menu */}
           <button className="menu__logout" onClick={handleLogout}>Sair</button>
         </div>

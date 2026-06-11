@@ -1,4 +1,5 @@
 import { Routes, Route, Navigate } from 'react-router-dom'
+import { UsuarioProvider } from './context/UsuarioContext'
 
 import LoginPage from './pages/LoginPage.jsx'
 import RecuperarSenhaPage from './pages/RecuperarSenhaPage.jsx'

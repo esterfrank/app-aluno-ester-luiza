@@ -24,6 +24,13 @@ const stats = [
   { icone: '💬', label: 'Discussões com IA', valor: '8', sub: 'Tópicos ativos' },
 ]
 
+function getSaudacao() {
+  const hora = new Date().getHours()
+  if (hora < 12) return 'Bom dia'
+  if (hora < 18) return 'Boa tarde'
+  return 'Boa noite'
+}
+
 function DashboardPage() {
   const { usuario } = useUsuario()
   const navigate = useNavigate()
@@ -31,7 +38,7 @@ function DashboardPage() {
   return (
     <div className="dashboard__container">
       <div className="welcome">
-        <h2>Bom dia, {usuario?.nome ?? 'Aluno'}.</h2>
+        <h2>{getSaudacao()}, {usuario?.nome ?? 'Aluno'}.</h2>
         <p>
           Bem-vindo de volta à sua sessão de estudo focado. Você tem 2 tarefas
           para esta semana e está atualmente adiantado em seu cronograma de leitura.
