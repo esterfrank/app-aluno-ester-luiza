@@ -40,7 +40,7 @@ function LoginPage() {
       return
     }
 
-    login({ nome: 'aluno', email })
+    login({ nome: 'Aluno', email })
     navigate('/dashboard')
   }
 
