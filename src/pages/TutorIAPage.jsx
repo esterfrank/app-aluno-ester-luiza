@@ -4,22 +4,41 @@ function TutorIA() {
   const [pergunta, setPergunta] = useState('')
   const [resposta, setResposta] = useState('')
   const [loading, setLoading] = useState(false)
+  const [erro, setErro] = useState(null)
 
-  function enviarPergunta() {
+  // Usa a API do JSONPlaceholder para simular uma resposta do tutor.
+  // O id do post é gerado pelo comprimento da pergunta (só para variar o resultado).
+  // O padrão obrigatório é: try / catch / finally + checagem de res.ok
+  async function enviarPergunta() {
     if (!pergunta.trim()) {
-      setResposta('Digite uma pergunta antes de enviar.')
+      setErro('Digite uma pergunta antes de enviar.')
       return
     }
 
     setLoading(true)
     setResposta('')
+    setErro(null)
 
-    setTimeout(() => {
-      setResposta(
-        'Resposta simulada: estude o conteúdo da disciplina e revise os conceitos principais.'
-      )
+    const id = (pergunta.trim().length % 100) + 1 // gera um id entre 1 e 100
+
+    try {
+      const res = await fetch(`https://jsonplaceholder.typicode.com/posts/${id}`)
+
+      // Checagem de res.ok obrigatória — se o servidor retornou 4xx ou 5xx, lança erro
+      if (!res.ok) {
+        throw new Error(`Erro ${res.status}: não foi possível obter uma resposta.`)
+      }
+
+      const dados = await res.json()
+
+      // Usa o "body" do post como resposta simulada do tutor
+      setResposta(dados.body)
+    } catch (err) {
+      setErro(err.message)
+    } finally {
+      // finally sempre executa — garante que o loading some mesmo se der erro
       setLoading(false)
-    }, 1200)
+    }
   }
 
   return (
@@ -55,7 +74,11 @@ function TutorIA() {
             <p className="estado-msg">Processando resposta...</p>
           )}
 
-          {resposta && (
+          {erro && (
+            <p className="estado-msg estado-msg--erro">⚠ {erro}</p>
+          )}
+
+          {resposta && !erro && (
             <p className="estado-msg">{resposta}</p>
           )}
         </div>
